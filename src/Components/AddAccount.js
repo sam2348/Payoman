@@ -1,6 +1,36 @@
-import React from 'react';
+import React,{useState} from 'react';
+import { NavLink,useNavigate } from 'react-router-dom';
+import axios from 'axios';
+const url="http://localhost:3001/account"
 
 const AddAccount = () => {
+  const navigate = useNavigate()
+  const [accontDteails,setAccontDteails] = useState({
+    BusinessName: "",
+    BankName: "",
+    AccountNumber: "",
+    SwiftCode: ""
+  });
+  const AddAccountDetails= (e)=>{
+    e.preventDefault();
+    try {
+        axios.post(url, {
+            BusinessName: accontDteails.BusinessName,
+            BankName: accontDteails.BankName,
+            AccountNumber: accontDteails.AccountNumber,
+            SwiftCode: accontDteails.SwiftCode,
+        });
+    } catch (error){
+        alert(error,"hello")
+    }
+    navigate("/TransferBank");
+    };
+    const inputHandler=(event)=>{
+        setAccontDteails((prestate) => ({
+        ...prestate,
+        [event.target.name]: event.target.value,
+     }));
+    }
   return (
     <div>
        <div className="container-fluid">
@@ -13,28 +43,31 @@ const AddAccount = () => {
                 <div className="logo text-center">
                     <img src="img/payoman-logo1.png" style={{width: 300}} />
                 </div>
-                <h5 className="form-heading mb-4 p-2 text-center">Add Account</h5>
+                <h4 className="form-heading my-4  text-center">Add Account</h4>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Business Name</label>
-                    <input type="name" className="form-control" id="exampleFormControlInput1" placeholder=" Enter Business Name" />
+                    <input type="name" onChange={inputHandler} name="BusinessName" className="form-control" id="exampleFormControlInput1" placeholder=" Enter Business Name" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Bank Name</label>
-                    <input type="text" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Bank Name" />
+                    <input type="text" onChange={inputHandler} name="BankName" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Bank Name" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Account Number</label>
-                    <input type="text" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="xxxx xxxxx xxxx" />
+                    <input type="text" onChange={inputHandler} name="AccountNumber" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="xxxx xxxxx xxxx" />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Swift Code</label>
-                    <input type="text" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="xxxx xxxxx xxxx" />
+                    <input type="text" onChange={inputHandler} name="SwiftCode" className="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="xxxx xxxxx xxxx" />
                 </div>
                 <br />
-                <button type="submit" className="btn btn-primary mb-3">Confirm</button>
-                </div></form>
-            </div>
-        </div>
+                <button type="submit" className="btn btn-primary mb-3" onClick={AddAccountDetails}><NavLink to="/TransferBank" className="text-white">Confirm
+                &nbsp;<i className="fa-solid fa-arrow-right" /></NavLink></button>
+
+               </div>
+            </form>
+         </div>
+      </div>
     </div>
  </div>
   )

@@ -1,10 +1,18 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React,{useEffect} from 'react'
+import { NavLink,useNavigate } from 'react-router-dom'
 
-const Login = ({ChangeRoute}) => {
-    const LoginHandler=()=>{
-        ChangeRoute(true);
-    }
+const Login = () => {
+    const navigate =useNavigate();
+    const LoginHandler = () => {
+        localStorage.setItem('login',true)
+        navigate('/')
+      };
+      useEffect(() => {
+        let login = localStorage.getItem('login');
+        if(login){
+          navigate('/')
+        }
+      })
   return (
     <div>
         <div className="container-fluid">
@@ -25,18 +33,12 @@ const Login = ({ChangeRoute}) => {
                                   <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter password" />
                               </div>
                               <div className="input-group ">
-                                  <div className="col-sm-6 ">
-                                      <label className="checkbox-inline d-flex align-items-center m-0">
-                                          <input type="checkbox" className="form-check-input" defaultChecked="checked" name="remember" id="flexCheckDefault" /><span className="check-symbol" />
-                                          <span className="ms-2">Stay logged in</span>
-                                      </label>
-                                  </div>
-                                  <div className="col-sm-6 text-end">
-                                      <a href>Forgot Password?</a>
+                                  <div className="col-sm text-end">
+                                      <NavLink to="/ForgetPassword">Forgot Password?</NavLink>
                                   </div>
                               </div>
                               <br />
-                              <button type="button" className="btn btn-primary" onClick={LoginHandler} ><i className="fa-solid fa-right-to-bracket" /> Login </button>
+                              <button type="button" className="btn btn-primary" onClick={LoginHandler} > Login&nbsp; <i className="fa-solid fa-right-to-bracket" /></button>
                               <div className="row mt-1">
                                   <div className="col mt-2 pt-2 text-center">
                                       Don't have account?  <NavLink to="/Signup" className="bottom-text">Register now</NavLink>

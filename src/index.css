@@ -13,6 +13,9 @@ body {
 .container-board {
     background: white;
 }
+.row {
+    margin: 0px !important;
+}
 
 a {
     color: #DC2027 !important;
@@ -65,3 +68,23 @@ span {
     background:white;
 }
 
+button.btn.btn-primary.add-money {
+    width: 116px;
+}
+i.fa-solid.fa-building-columns.transfer {
+    color: white;
+    font-size: 16px;
+}
+button.btn.btn-primary.swipe {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+.input-group.next-button {
+    justify-content: center;
+}
+button.btn.btn-primary.add-new-account{
+    background: white;
+    color: #DC2027;
+    border: 1px solid #DC2027;
+}

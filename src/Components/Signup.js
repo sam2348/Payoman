@@ -30,7 +30,7 @@ const Signup = () => {
                               <div className="input-group mb-3">
                                   <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Confirm Password" />
                               </div>
-                              <button type="submit" className="btn btn-primary">Register</button>
+                              <NavLink  to="/Login"><button type="submit" className="btn btn-primary">Register&nbsp; <i className="fa-solid fa-arrow-right" /></button></NavLink>
                               <div className="row mt-1">
                                   <div className="col mt-2 text-center">
                                       Already have account?  <NavLink  to="/Login" className="bottom-text">Login</NavLink>
